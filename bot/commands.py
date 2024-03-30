@@ -205,3 +205,7 @@ async def stop(update : Update, context : ContextTypes.DEFAULT_TYPE) -> None:
         job_iv_100 = context.chat_data.get("callback_coordinate_iv_100")
         job_iv_90 = context.chat_data.get("callback_coordinate_iv_90")
         
+        if job_iv_100:
+            job_iv_100.schedule_removal()
+            del context.chat_data["callback_coordinate_iv_100"]
+        

@@ -88,7 +88,7 @@ async def callback_coordinate_iv_100(context : ContextTypes.DEFAULT_TYPE):
         await send_coordinates(context, total_text_retry)
         
 # NOTE : Start iv 100
-async def start_iv_100(update : Update, context : ContextTypes.DEFAULT_TYPE) => None:
+async def start_iv_100(update : Update, context : ContextTypes.DEFAULT_TYPE) -> None:
     try:
         # TODO : Check jika pengguna dibolehkan mengaktifkan perintah.
         if update.effective_user.id not in ALLOWED_USERS:
@@ -128,7 +128,7 @@ async def start_iv_100(update : Update, context : ContextTypes.DEFAULT_TYPE) => 
         )
         
     except Exception as e:
-        print(f""Error in start: {e}"")
+        print(f"Error in start: {e}")
         await update.message.reply_text(
             "I'm sorry, an error has occurred with the bot. Please report this error to the bot administrator so that it can be fixed as soon as possible"
         )
@@ -188,14 +188,14 @@ async def start_iv_90(update : Update, context : ContextTypes.DEFAULT_TYPE) -> N
         
 async def stop(update : Update, context : ContextTypes.DEFAULT_TYPE) -> None:
     try:
-        # TODO : Check if the user is allowed to use the command.
+        # TODO : Mengecek apakah pengguna diizinkan untuk menggunakan perintah tersebut.
         if update.effective_user.id not in ALLOWED_USERS:
             await update.message.reply_text(
                 "You do not have permission to stop the sending of coordinates."
             )
             return
         
-        # TODO : Check if the message originates from the coordinates group.
+        # TODO : Mengecek apakah pesan berasal dari grup koordinat.
         if update.effective_chat.id != GROUP_COORDINATES_ID:
             await update.message.reply_text(
                 "Commands can only be activated in the group @top100galaxy1"
@@ -208,4 +208,31 @@ async def stop(update : Update, context : ContextTypes.DEFAULT_TYPE) -> None:
         if job_iv_100:
             job_iv_100.schedule_removal()
             del context.chat_data["callback_coordinate_iv_100"]
+            await update.message.reply_text(
+                "The shipment of coordinates IV 100 has been detained."
+            )
+        elif job_iv_90:
+            job_iv_90.schedule_removal()
+            del context.chat_data["callback_coordinate_iv_90"]
+            await update.message.reply_text(
+                "The shipment of coordinates IV 90 has been detained."
+            )
+        else : 
+            await update.message.reply_text(
+                "It was not found any active shipment of coordinates."
+            )
+            
+    except telegram.error.TelegramError as e:
+        print("Telegram error: {e}")
+        await update.message.reply_text(
+            "It has occurred an error while executing the /stop command. Please, communicate this error to the bot administrator so it can be fixed as soon as possible."
+        )
+        
+    except Exception as e:
+        print("Error on stop : {e}")
+        await update.message.reply_text(
+            "I'm sorry, an error has occurred with the bot. Please report this error to the bot administrator so that it can be fixed as soon as possible"
+        )
+        
+        
         

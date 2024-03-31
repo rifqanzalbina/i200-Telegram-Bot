@@ -1,5 +1,6 @@
 import logging, requests, logging, time, json, datetime, re
 
+# $ Patch Pokemon Data
 def patch_pokemon_data(iv):
     """Obtains Pokemon data from multiple sources and returns a combined list of Pokemon with 100% IV."""
     total_data = []

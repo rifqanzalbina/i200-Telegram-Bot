@@ -7,35 +7,20 @@ Run Project you need to add following environment variables to your .env file
 
 ```TOKEN``` <br>
 
-<br>
-
 ```DEVELOPER_CHAT_ID``` <br>
-
-<br>
 
 ```BOTHOST``` <br>
 
-<br>
-
 ```DEBUG``` <br>
-
-<br>
 
 ```ADMIN``` <br>
 
-<br>
-
 ```SUPPORT``` <br>
-
-<br>
 
 ```CHAT_ID``` <br>
 
-<br>
-
 ```PERIOD``` <br>
 
-<br>
 
 <h3>Clone The Project</h3>
 
